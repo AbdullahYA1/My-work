@@ -34,7 +34,7 @@ class CrudController extends Controller
             'old' => 'required|integer',
             'description' => 'required|string',
             'show' => 'required |in:1,0',
-            'status' => 'required| in:enable ,disable'
+            'status' => 'required|in:enable, disable'
         ]);
 
         $crud = Crud::create($validated);
