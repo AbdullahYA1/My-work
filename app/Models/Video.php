@@ -3,22 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Post extends Model
-
+class Video extends Model
 {
-    use HasFactory;
-
-    protected $fillable = [
+    protected $fillable =[
         'title',
         'content',
+
     ];
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
     public function comment(){
         return $this->morphOne(Comment::class ,'commentable');
     }
@@ -26,6 +18,7 @@ class Post extends Model
         return $this->morphMany(Comment::class ,'commentable');
     }
     public function tags(){
-        return $this->morphToMany(Tag::class ,'taggable');
+        return $this->morphToMany(Tag::class ,'taggable',"taggables");
     }
+    
 }
