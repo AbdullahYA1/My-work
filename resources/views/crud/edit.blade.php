@@ -1,7 +1,7 @@
 @extends('index')
 @section('content')
     <h1>Update Item</h1>
-    <form action="{{ route('crud.update', ['crud' => $crud->id]) }}" method="POST">
+    <form action="{{ route('crud.update', ['crud' => $crud->id]) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -26,6 +26,9 @@
             <option @selected($crud->status == 'enable') value="enable">Enable</option>
             <option @selected($crud->status == 'disable') value="disable">Disable</option>
         </select>
+        <hr />
+        <label for="photo">Upload Photo</label>
+        <input type="file" placeholder="photo" name="photo">
         <hr />
     </form>
 @endsection

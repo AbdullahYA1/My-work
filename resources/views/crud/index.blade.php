@@ -11,14 +11,14 @@
                 <th>status</th>
                 <th>show</th>
                 <th>Created At</th>
+                <th>photo</th>
                 <th colspan="6" class="text-center">Actions</th>
             </tr>
         </thead>
         <tbody>
-            @each('crud.data',$crud,'data')
+            @each('crud.data', $crud, 'data')
         </tbody>
     </table>
 @endsection
 
 @stack('js')
-

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\UserLogin;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -47,5 +48,9 @@ class LoginController extends Controller
         } else {
             return ['name' => $request->get('email'), 'password' => $request->get('password')];
         }
+    }
+
+    public function authenticated (Request $request ,$user){
+event(new UserLogin($user));
     }
 }

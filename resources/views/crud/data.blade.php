@@ -5,6 +5,7 @@
     <td>{{ $data->show == 1 ? 'show' : 'hidden' }}</td>
     <td>{{ $data->status }}</td>
     <td>{{ $data->created_at }}</td>
+    <td>{{ $data->photo }}</td>
     <td>
     <td>
         <td><a href="{{ route('crud.edit', ['crud' => $data->id]) }}" class="btn  btn-warning">Edit</a></td>

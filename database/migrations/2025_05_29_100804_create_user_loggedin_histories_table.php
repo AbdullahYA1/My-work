@@ -4,7 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-
 return new class extends Migration
 {
     /**
@@ -12,18 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('crud', function (Blueprint $table) {
+        Schema::create('user_loggedin_histories', function (Blueprint $table) {
             $table->id();
+            $table->string('ip');
             $table->string('name');
-            $table->longText('description');
-            $table->date('notifyed_at')->nullable();
-            $table->integer('old');
-            $table->string('status'); // ✅ Add this
-            $table->boolean('show');  // ✅ Add this
+            $table->string('email');
+            $table->string('user_agent');
             $table->timestamps();
-            $table->softDeletes();
-
-
         });
     }
 
@@ -32,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('crud');
+        Schema::dropIfExists('user_loggedin_histories');
     }
 };

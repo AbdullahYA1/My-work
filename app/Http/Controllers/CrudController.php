@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CrudUpdate;
+use App\Http\Requests\CrudCreate;
 use Illuminate\Http\Request;
 use App\Models\Crud;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\RedirectResponse;
 
 class CrudController extends Controller
 {
@@ -21,25 +25,30 @@ class CrudController extends Controller
      */
     public function create()
     {
-        return view('crud.create');
+        if ($this->authorize('create', Crud::class)) {
+            return view('crud.create');
+        }
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CrudCreate $request): RedirectResponse
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'old' => 'required|integer',
             'description' => 'required|string',
-            'show' => 'required |in:1,0',
-            'status' => 'required|in:enable, disable'
+            'show' => 'required|in:1,0',
+            'status' => 'required|in:enable,disable'
         ]);
+    $validated ['photo'] = request()->file('photo')->store('crud');
 
         $crud = Crud::create($validated);
-        return response()->json($crud, 201);
+        // $crud->replicate()->fill(['name' => 'ahmeddd'])->save();
+        return redirect()->route('crud.index');
     }
+
 
     /**
      * Display the specified resource.
@@ -56,12 +65,13 @@ class CrudController extends Controller
     public function edit(string $id)
     {
         $crud = Crud::findOrFail($id);
-        return view('crud.edit', compact('crud'));
+            return view('crud.edit', compact('crud'));
+        
     }
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CrudUpdate $request, string $id)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -73,6 +83,7 @@ class CrudController extends Controller
 
         $crud = Crud::findOrFail($id);
         $crud->update($validated);
+
 
         return redirect()->route('crud.index');
     }

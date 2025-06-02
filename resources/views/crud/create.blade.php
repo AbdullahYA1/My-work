@@ -10,12 +10,12 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('crud.store') }}" method="POST">
+    <form action="{{ route('crud.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <input type="text" name="name" placeholder="Enter name">
         <input type="number" name="old" placeholder="Enter age">
         <input type="textarea" name="description" placeholder="enter your description">
-      
+
         <hr />
         <label for="show">Show Data</label>
         <input type="radio" name="show" value="1" id="show">
@@ -31,7 +31,10 @@
             <option value="disable">Disable</option>
         </select>
         <hr />
-  <input type="submit" value="Create">
+        <label for="photo">Upload Photo</label>
+        <input type="file" placeholder="photo" name="photo">
+        <hr />
+        <input type="submit" value="Create">
     </form>
 @endsection
 

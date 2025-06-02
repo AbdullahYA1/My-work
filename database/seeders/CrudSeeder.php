@@ -13,19 +13,13 @@ class CrudSeeder extends Seeder
      */
     public function run(): void
     {
-        Crud::factory()->count(10)
-            ->state(
-                new Sequence(
-                    ['status' => 'enable'],
-                    ['status' => 'disable'],
-                )
-            )
-            ->state(
-                new Sequence(
-                    ['show' => '0'],
-                    ['show' => '1'],
-                )
-            )
-            ->create();
+        Crud::factory()
+        ->count(10)
+        ->state(new Sequence(
+            ['status' => 'enable', 'show' => 0],
+            ['status' => 'disable', 'show' => 1],
+        ))
+        ->create();
+    
     }
 }

@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('crud', function (Blueprint $table) {
-            $table->enum('status', ['enable', 'disable']);
-            $table->boolean('show');
+        Schema::table('users', function (Blueprint $table) {
+            $table->enum('role',['admin','moderate','user']);
         });
     }
 
@@ -22,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('crud');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };
